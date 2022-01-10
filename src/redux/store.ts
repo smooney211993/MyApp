@@ -41,4 +41,8 @@ const store = configureStore({
 // Returns the persisted store that the app will consume
 const persistor = persistStore(store)
 
+// Infer the Rootstate and AppDispatch from the store
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
 export { persistor, store }
