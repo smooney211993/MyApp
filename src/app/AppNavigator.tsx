@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native'
+import { NavigationContainer, NavigatorScreenParams, RouteProp } from '@react-navigation/native'
 import { createBottomTabNavigator, BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack'
 // @ts-ignore
@@ -17,25 +17,12 @@ import SplashScreen from '../screens/SplashScreen'
 import colors from '../constants/colors'
 import { useAppSelector } from '../hooks/reduxHooks'
 import fonts from '../constants/fonts'
-import { Trip } from '../types/apiTypes'
-
-export type NavigatorParamList = {
-  tabs: NavigatorScreenParams<TabNavigatorParamList>
-}
-
-export type TripsNavigatorParamsList = {
-  tripsList: undefined
-  tripDetails: { trip: Trip }
-}
-
-export type TabNavigatorParamList = {
-  home: undefined
-  trips: TripsNavigatorParamsList
-}
-
-export type SplashNavigatorParamList = {
-  splash: undefined
-}
+import {
+  SplashNavigatorParamList,
+  TripsNavigatorParamsList,
+  NavigatorParamList,
+  TabNavigatorParamList,
+} from './navigationTypes'
 
 const Splash = createNativeStackNavigator<SplashNavigatorParamList>()
 const TripStack = createNativeStackNavigator<TripsNavigatorParamsList>()
@@ -69,7 +56,7 @@ const Trips = () => {
   return (
     <TripStack.Navigator screenOptions={stackNavigatorDefaultOptions}>
       <TripStack.Screen name='tripsList' component={TripScreen} />
-      <TripStack.Screen name='tripDetails' component={TripDetailsScreen} />
+      <TripStack.Screen name='tripDetails' component={TripDetailsScreen} options={{ headerShown: true }} />
     </TripStack.Navigator>
   )
 }
