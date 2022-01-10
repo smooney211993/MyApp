@@ -27,7 +27,7 @@ const persistentReducer = persistReducer(
     key: 'root',
     version: 1,
     storage: AsyncStorage,
-    whitelist: ['trips'], // Only persist this reducer. We are only going to store data that is persisted here
+    whitelist: ['app'], // Only persist this reducer. We are only going to store data that is persisted here
   },
   rootReducer
 )

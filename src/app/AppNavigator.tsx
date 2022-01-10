@@ -75,7 +75,7 @@ const stackNavigatorDefaultOptions: NativeStackNavigationOptions = {
 }
 
 export const AppNavigator = () => {
-  const { isSplashedViewed } = useAppSelector(state => state.app)
+  const { isSplashedViewed } = useAppSelector(state => state.ui)
 
   return (
     <NavigationContainer>

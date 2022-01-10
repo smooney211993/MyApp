@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { splashedViewed } from '../redux/reducers/appReducer'
+import { splashedViewed } from '../redux/reducers/uiReducer'
 
 const styles = StyleSheet.create({
   pageView: {
