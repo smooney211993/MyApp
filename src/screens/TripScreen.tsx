@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import useGetTrips from '../hooks/api/useGetTrips'
 
 const styles = StyleSheet.create({
   pageView: {
@@ -9,6 +10,7 @@ const styles = StyleSheet.create({
 })
 
 const TripScreen: React.FC = () => {
+  useGetTrips()
   return <View style={styles.pageView} />
 }
 

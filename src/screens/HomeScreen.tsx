@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import triplists from '../../trip-list.json'
 
 const styles = StyleSheet.create({
   pageView: {
@@ -9,6 +10,7 @@ const styles = StyleSheet.create({
 })
 
 export const HomeScreen: React.FC = () => {
+  console.log(triplists)
   return <View style={styles.pageView} />
 }
 

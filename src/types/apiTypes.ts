@@ -1,11 +1,10 @@
-export type Country = 'New Zealand' | 'Malaysia' | 'Japan'
-export type City = 'Bali'
-export type TripStatus = 'FINISHED' | 'NOT_STARTED' | 'STARTED'
-
 export type Trip = {
-  id: number
+  id: string
   name: string
   startDate: string
   endDate: string
-  destination: (Country | City)[]
+  destinations: string[]
+  status: string
 }
+
+export type ApiStatus = 'init' | 'loading' | 'success' | 'fail'
