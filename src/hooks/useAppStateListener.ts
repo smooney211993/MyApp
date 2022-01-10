@@ -32,8 +32,7 @@ function useAppStateListener() {
     return () => {
       subscription.remove()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [handleAppStateChange])
 }
 
 export default useAppStateListener

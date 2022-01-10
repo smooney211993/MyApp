@@ -1,6 +1,6 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../reduxHooks'
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { delay } from '../../helpers/promiseHelper'
 import tripsList from '../../../trip-list.json'
 import { Trip } from '../../types/apiTypes'
@@ -13,10 +13,17 @@ const getMockApi = async (): Promise<Trip[]> => {
   return tripsList
 }
 
+/**
+ *A hook that fetches the tripLists when the screen is in focus and the apiStatus state is 'init'
+ *If apiStatus has failed, it sets back to 'init' when navigating away from the screen so it can retry on next screen focus.
+ */
+
 function useGetTrips() {
+  const navigation = useNavigation()
   const dispatch = useAppDispatch()
   const { apiStatus } = useAppSelector(state => state.trips)
 
+  // When the screen is in focus and the apiStatus is 'init' fetch the tripList data
   useFocusEffect(
     useCallback(() => {
       let isMounted = true
@@ -40,6 +47,16 @@ function useGetTrips() {
       }
     }, [apiStatus, dispatch])
   )
+
+  // If the fetch request has failed, we want to set the apiStatus back to 'init' when moving away from the screen.
+  // This ensures that it can retry when navigating back to the screen.
+  useEffect(() => {
+    return navigation.addListener('blur', () => {
+      if (apiStatus === 'fail') {
+        dispatch(setApiStatus('init'))
+      }
+    })
+  }, [apiStatus, dispatch, navigation])
 }
 
 export default useGetTrips

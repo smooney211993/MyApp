@@ -1,19 +1,14 @@
 export default {
   tripListItem: {
-    name: (name: string): string => `name: ${name}`,
-    startDate: (startDate: string): string => `start-date: ${startDate}`,
-    endDate: (endDate: string): string => `end-date: ${endDate}`,
-    destination: (destination: string[]): string => `destination: ${destination.join(', ')} `,
+    getTripLength: (startDate: string, endDate: string) => `${startDate} - ${endDate}`,
     status: (status: string) => {
       switch (status) {
         case 'NOT_STARTED':
-          return 'Status: Not Started'
-
+          return 'Not Started'
         case 'STARTED':
-          return 'Status: Started'
-
+          return 'Started'
         case 'FINISHED':
-          return 'Status: Finished'
+          return 'Finished'
         default:
           return ''
       }
