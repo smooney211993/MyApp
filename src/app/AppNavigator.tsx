@@ -28,7 +28,7 @@ const Tab = createBottomTabNavigator<TabNavigatorParamList>()
 
 const bottomTabsScreenOptions: BottomTabNavigationOptions = {
   headerShown: false,
-  tabBarActiveTintColor: 'black',
+  tabBarActiveTintColor: colors.black,
   tabBarInactiveTintColor: colors.grey,
 }
 
