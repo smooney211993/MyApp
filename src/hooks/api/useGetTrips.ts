@@ -5,7 +5,7 @@ import { delay } from '../../helpers/promiseHelper'
 import tripsList from '../../../trip-list.json'
 import { Trip } from '../../types/apiTypes'
 import { setApiStatus } from '../../redux/reducers/tripsScreenReducer'
-import { setTrips } from '../../redux/reducers/appReducer'
+import { setTrips } from '../../redux/reducers/tripsScreenReducer'
 
 // Mocks an api request
 const getMockApi = async (): Promise<Trip[]> => {
@@ -23,7 +23,6 @@ function useGetTrips() {
       const getTrips = async () => {
         if (apiStatus === 'init') {
           try {
-            dispatch(setApiStatus('loading'))
             const response = await getMockApi()
             if (isMounted) {
               dispatch(setTrips(response))
@@ -35,7 +34,6 @@ function useGetTrips() {
           }
         }
       }
-
       getTrips()
       return () => {
         isMounted = false

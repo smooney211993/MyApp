@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import useGetTrips from '../hooks/api/useGetTrips'
+import { useAppSelector } from '../hooks/reduxHooks'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const styles = StyleSheet.create({
   pageView: {
@@ -11,7 +13,14 @@ const styles = StyleSheet.create({
 
 const TripScreen: React.FC = () => {
   useGetTrips()
-  return <View style={styles.pageView} />
+  const { apiStatus } = useAppSelector(state => state.trips)
+  return (
+    <>
+      <View style={styles.pageView}>
+        <LoadingSpinner isLoading={apiStatus === 'init'} />
+      </View>
+    </>
+  )
 }
 
 export default TripScreen

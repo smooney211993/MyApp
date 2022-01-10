@@ -1,6 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { ApiStatus, Trip } from '../../types/apiTypes'
-import { setTrips } from './appReducer'
 
 interface State {
   trips: Trip[]
@@ -11,8 +10,8 @@ const initialState: State = {
   trips: [],
   apiStatus: 'init',
 }
-
-export const setApiStatus = createAction<ApiStatus>('app/setApiStatus')
+export const setTrips = createAction<Trip[]>('tripScreenReducer/setTrips')
+export const setApiStatus = createAction<ApiStatus>('tripScreenReducer/setApiStatus')
 
 export default createReducer(initialState, builder => {
   builder.addCase(setTrips, (state, { payload }) => {

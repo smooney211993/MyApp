@@ -1,18 +1,17 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { Trip } from '../../types/apiTypes'
 
 interface State {
-  trips: Trip[]
+  isSplashedViewed: boolean
 }
 
 const initialState: State = {
-  trips: [],
+  isSplashedViewed: false,
 }
 
-export const setTrips = createAction<Trip[]>('app/setTrips')
+export const splashedViewed = createAction('app/splashedViewed')
 
 export default createReducer(initialState, builder => {
-  builder.addCase(setTrips, (state, { payload }) => {
-    state.trips = payload
+  builder.addCase(splashedViewed, state => {
+    state.isSplashedViewed = true
   })
 })
