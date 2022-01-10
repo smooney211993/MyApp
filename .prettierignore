@@ -1,0 +1,8 @@
+.next/*
+.cache/*
+.vscode/*
+.idea/*
+android/*
+ios/*
+gen/*
+node_modules/*
