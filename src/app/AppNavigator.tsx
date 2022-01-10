@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationContainer, NavigatorScreenParams, RouteProp } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator, BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack'
 // @ts-ignore
@@ -23,6 +23,7 @@ import {
   NavigatorParamList,
   TabNavigatorParamList,
 } from './navigationTypes'
+import useAppStateListener from '../hooks/useAppStateListener'
 
 const Splash = createNativeStackNavigator<SplashNavigatorParamList>()
 const TripStack = createNativeStackNavigator<TripsNavigatorParamsList>()
@@ -83,6 +84,7 @@ const BottomTabs = () => {
 }
 
 export const AppNavigator = () => {
+  useAppStateListener()
   const { isSplashedViewed } = useAppSelector(state => state.ui)
 
   return (

@@ -9,7 +9,6 @@
  */
 
 import React from 'react'
-import { StyleSheet, Text, useColorScheme, View } from 'react-native'
 import { AppNavigator } from './AppNavigator'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'

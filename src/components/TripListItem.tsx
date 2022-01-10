@@ -6,6 +6,7 @@ import colors from '../constants/colors'
 import fonts from '../constants/fonts'
 import text from '../constants/text'
 import { useNavigation } from '@react-navigation/native'
+import { useAppSelector } from '../hooks/reduxHooks'
 
 type Props = {
   trip: Trip
@@ -16,6 +17,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 10,
     backgroundColor: colors.TRIP_CARD_BACKGROUND,
+    margin: 20,
+  },
+  highLightedItemView: {
+    flexDirection: 'column',
+    padding: 10,
+    backgroundColor: colors.TRIP_CARD_BACKGROUND_HIGHLIGHTED,
     margin: 20,
   },
   nameText: {
@@ -54,6 +61,7 @@ const {
 } = text.tripListItem
 
 const TripListItem: React.FC<Props> = ({ trip, trip: { name, startDate, endDate, destinations, status } }) => {
+  const isHighlighted = useAppSelector(state => state.ui.appState === 'active' && status === 'NOT_STARTED')
   const navigate = useNavigation()
   const tripStatus = useMemo(() => formatStatus(status), [status])
   const onTripPress = useCallback(() => {
@@ -61,12 +69,15 @@ const TripListItem: React.FC<Props> = ({ trip, trip: { name, startDate, endDate,
   }, [navigate, trip])
 
   return (
-    <TouchableOpacity style={styles.itemView} onPress={onTripPress}>
+    <TouchableOpacity
+      style={[styles.itemView, isHighlighted ? styles.highLightedItemView : null]}
+      onPress={onTripPress}
+    >
       <Text style={styles.nameText}>{formatName(name)}</Text>
       <Text style={styles.startDateText}>{formatStartDate(startDate)}</Text>
       <Text style={styles.endDateText}>{formatEndDate(endDate)}</Text>
       <Text style={styles.destinationsText}>{formatDestination(destinations)}</Text>
-      <Text style={styles.statusText}>{tripStatus}</Text>
+      <Text style={[styles.statusText]}>{tripStatus}</Text>
     </TouchableOpacity>
   )
 }
