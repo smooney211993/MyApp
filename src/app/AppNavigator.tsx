@@ -12,18 +12,25 @@ import TripsIcon from '../assets/icons/tab-trips-icon.svg'
 import InactiveTripsIcon from '../assets/icons/tab-inactive-trips-icon.svg'
 import HomeScreen from '../screens/HomeScreen'
 import TripScreen from '../screens/TripScreen'
+import TripDetailsScreen from '../screens/TripDetailsScreen'
 import SplashScreen from '../screens/SplashScreen'
 import colors from '../constants/colors'
 import { useAppSelector } from '../hooks/reduxHooks'
 import fonts from '../constants/fonts'
+import { Trip } from '../types/apiTypes'
 
 export type NavigatorParamList = {
   tabs: NavigatorScreenParams<TabNavigatorParamList>
 }
 
+export type TripsNavigatorParamsList = {
+  tripsList: undefined
+  tripDetails: { trip: Trip }
+}
+
 export type TabNavigatorParamList = {
   home: undefined
-  trips: undefined
+  trips: TripsNavigatorParamsList
 }
 
 export type SplashNavigatorParamList = {
@@ -31,6 +38,7 @@ export type SplashNavigatorParamList = {
 }
 
 const Splash = createNativeStackNavigator<SplashNavigatorParamList>()
+const TripStack = createNativeStackNavigator<TripsNavigatorParamsList>()
 const Stack = createNativeStackNavigator<NavigatorParamList>()
 const Tab = createBottomTabNavigator<TabNavigatorParamList>()
 
@@ -43,14 +51,27 @@ const bottomTabsScreenOptions: BottomTabNavigationOptions = {
   tabBarInactiveTintColor: colors.grey,
 }
 
+const stackNavigatorDefaultOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+}
+
 /**
  * Typing useNavigation can be extended by declaration merging
  * Refer https://reactnavigation.org/docs/typescript/#specifying-default-types-for-usenavigation-link-ref-etc
  */
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends SplashNavigatorParamList, TabNavigatorParamList {}
+    interface RootParamList extends SplashNavigatorParamList, TripsNavigatorParamsList, TabNavigatorParamList {}
   }
+}
+
+const Trips = () => {
+  return (
+    <TripStack.Navigator screenOptions={stackNavigatorDefaultOptions}>
+      <TripStack.Screen name='tripsList' component={TripScreen} />
+      <TripStack.Screen name='tripDetails' component={TripDetailsScreen} />
+    </TripStack.Navigator>
+  )
 }
 
 const BottomTabs = () => {
@@ -65,17 +86,13 @@ const BottomTabs = () => {
       />
       <Tab.Screen
         name='trips'
-        component={TripScreen}
+        component={Trips}
         options={{
           tabBarIcon: ({ focused }) => (focused ? <TripsIcon /> : <InactiveTripsIcon />),
         }}
       />
     </Tab.Navigator>
   )
-}
-
-const stackNavigatorDefaultOptions: NativeStackNavigationOptions = {
-  headerShown: false,
 }
 
 export const AppNavigator = () => {

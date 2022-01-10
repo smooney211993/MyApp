@@ -5,11 +5,12 @@ import { useAppSelector } from '../hooks/reduxHooks'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { Trip } from '../types/apiTypes'
 import TripListItem from '../components/TripListItem'
+import colors from '../constants/colors'
 
 const styles = StyleSheet.create({
   pageView: {
     flex: 1,
-    backGroundColor: 'white',
+    backGroundColor: colors.SCREEN_BACKGROUND,
   },
 })
 
@@ -18,6 +19,7 @@ const TripScreen: React.FC = () => {
   const { apiStatus } = useAppSelector(state => state.trips)
   const { trips } = useAppSelector(state => state.app)
   const keyExtractor = useCallback((item: Trip) => item.id, [])
+
   const renderItem: ListRenderItem<Trip> = useCallback(({ item }) => <TripListItem trip={item} />, [])
   return (
     <>
