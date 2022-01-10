@@ -1,12 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
-const styles = {
+const styles = StyleSheet.create({
   pageView: {
     flex: 1,
     backGroundColor: 'white',
   },
-}
+})
 
 const TripScreen: React.FC = () => {
   return <View style={styles.pageView} />
