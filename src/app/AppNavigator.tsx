@@ -15,6 +15,7 @@ import TripScreen from '../screens/TripScreen'
 import SplashScreen from '../screens/SplashScreen'
 import colors from '../constants/colors'
 import { useAppSelector } from '../hooks/reduxHooks'
+import fonts from '../constants/fonts'
 
 export type NavigatorParamList = {
   tabs: NavigatorScreenParams<TabNavigatorParamList>
@@ -35,6 +36,9 @@ const Tab = createBottomTabNavigator<TabNavigatorParamList>()
 
 const bottomTabsScreenOptions: BottomTabNavigationOptions = {
   headerShown: false,
+  tabBarLabelStyle: {
+    fontFamily: fonts.sfProDisplayRegular,
+  },
   tabBarActiveTintColor: colors.black,
   tabBarInactiveTintColor: colors.grey,
 }
@@ -45,7 +49,7 @@ const bottomTabsScreenOptions: BottomTabNavigationOptions = {
  */
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends TabNavigatorParamList {}
+    interface RootParamList extends SplashNavigatorParamList, TabNavigatorParamList {}
   }
 }
 
