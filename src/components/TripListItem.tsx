@@ -9,6 +9,8 @@ import { useNavigation } from '@react-navigation/native'
 import { useAppSelector } from '../hooks/reduxHooks'
 import TripLengthText from './TripLengthText'
 import TripTitleText from './TripTitleText'
+import analytics from '@react-native-firebase/analytics'
+import analyticEvents from '../constants/analyticsEvents'
 
 type Props = {
   trip: Trip
@@ -49,7 +51,10 @@ const TripListItem: React.FC<Props> = ({ trip, trip: { name, startDate, endDate,
   const isHighlighted = useAppSelector(state => state.ui.appState === 'active' && status === 'NOT_STARTED')
   const navigate = useNavigation()
   const tripStatus = useMemo(() => formatStatus(status), [status])
-  const onTripPress = useCallback(() => {
+  const onTripPress = useCallback(async () => {
+    await analytics().logEvent(analyticEvents.tripPressed, {
+      id: trip.id,
+    })
     navigate.navigate('tripDetails', { trip })
   }, [navigate, trip])
 
