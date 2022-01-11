@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback, useLayoutEffect } from 'react'
 import { AppState, AppStateStatus } from 'react-native'
 
 /**
- * A hook that Detect when an App pushed to the Background or pushed to the Foreground.
+ * A hook that detects when the App is pushed to the Background or pushed to the Foreground.
  * It takes in anActiveCallback and onInActiveCallback which is called respectively on app state.
  * Refer to https://reactnative.dev/docs/appstate
  */
