@@ -47,6 +47,7 @@ const stackNavigatorDefaultOptions: NativeStackNavigationOptions = {
 /**
  * Typing useNavigation can be extended by declaration merging
  * Refer https://reactnavigation.org/docs/typescript/#specifying-default-types-for-usenavigation-link-ref-etc
+ * It is useful as it allows the useAppNavigation to be safely typed in ui components.
  */
 declare global {
   namespace ReactNavigation {

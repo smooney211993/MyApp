@@ -3,10 +3,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import fonts from '../constants/fonts'
 import uiConstants from '../constants/uiConstants'
 
-type Props = {
-  destinations: string[]
-}
-
 const styles = StyleSheet.create({
   destinationContainer: {
     flexDirection: 'column',
@@ -20,6 +16,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 })
+
+type Props = {
+  destinations: string[]
+}
 
 const TripDestinationText: React.FC<Props> = ({ destinations }) => {
   return destinations.length > 0 ? (

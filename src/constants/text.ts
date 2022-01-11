@@ -1,7 +1,7 @@
 export default {
   tripListItem: {
     getTripLength: (startDate: string, endDate: string) => `${startDate} - ${endDate}`,
-    status: (status: string) => {
+    formatTripStatus: (status: string) => {
       switch (status) {
         case 'NOT_STARTED':
           return 'Not Started'

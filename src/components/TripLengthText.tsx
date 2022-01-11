@@ -4,11 +4,6 @@ import text from '../constants/text'
 import fonts from '../constants/fonts'
 import uiConstants from '../constants/uiConstants'
 
-type Props = {
-  startDate: string
-  endDate: string
-}
-
 const styles = StyleSheet.create({
   dateText: {
     fontFamily: fonts.sfProDisplayRegular,
@@ -16,6 +11,11 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 })
+
+type Props = {
+  startDate: string
+  endDate: string
+}
 
 const TripLengthText: React.FC<Props> = ({ startDate, endDate }) => {
   return <Text style={styles.dateText}> {text.tripListItem.getTripLength(startDate, endDate)}</Text>

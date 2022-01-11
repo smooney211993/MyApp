@@ -12,10 +12,6 @@ import TripTitleText from './TripTitleText'
 import analytics from '@react-native-firebase/analytics'
 import analyticEvents from '../constants/analyticsEvents'
 
-type Props = {
-  trip: Trip
-}
-
 const styles = StyleSheet.create({
   itemView: {
     flexDirection: 'column',
@@ -45,12 +41,16 @@ const styles = StyleSheet.create({
   },
 })
 
-const { status: formatStatus } = text.tripListItem
+const { formatTripStatus } = text.tripListItem
+
+type Props = {
+  trip: Trip
+}
 
 const TripListItem: React.FC<Props> = ({ trip, trip: { name, startDate, endDate, status } }) => {
   const isHighlighted = useAppSelector(state => state.ui.appState === 'active' && status === 'NOT_STARTED')
   const navigate = useNavigation()
-  const tripStatus = useMemo(() => formatStatus(status), [status])
+  const tripStatus = useMemo(() => formatTripStatus(status), [status])
   const onTripPress = useCallback(async () => {
     await analytics().logEvent(analyticEvents.tripPressed, {
       id: trip.id,

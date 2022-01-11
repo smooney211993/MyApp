@@ -3,10 +3,6 @@ import { StyleSheet, Text } from 'react-native'
 import fonts from '../constants/fonts'
 import uiConstants from '../constants/uiConstants'
 
-type Props = {
-  name: string
-}
-
 const styles = StyleSheet.create({
   titleText: {
     fontFamily: fonts.sfProDisplayRegular,
@@ -15,6 +11,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 })
+
+type Props = {
+  name: string
+}
 
 const TripTitleText: React.FC<Props> = ({ name }) => {
   return <Text style={styles.titleText}> {name}</Text>
