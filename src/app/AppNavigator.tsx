@@ -15,7 +15,7 @@ import TripScreen from '../screens/TripScreen'
 import TripDetailsScreen from '../screens/TripDetailsScreen'
 import SplashScreen from '../screens/SplashScreen'
 import colors from '../constants/colors'
-import { useAppSelector } from '../hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import fonts from '../constants/fonts'
 import {
   SplashNavigatorParamList,
@@ -24,6 +24,7 @@ import {
   TabNavigatorParamList,
 } from './navigationTypes'
 import useAppStateListener from '../hooks/useAppStateListener'
+import { setAppState } from '../redux/reducers/uiReducer'
 
 const Splash = createNativeStackNavigator<SplashNavigatorParamList>()
 const TripStack = createNativeStackNavigator<TripsNavigatorParamsList>()
@@ -84,7 +85,11 @@ const BottomTabs = () => {
 }
 
 export const AppNavigator = () => {
-  useAppStateListener()
+  const dispatch = useAppDispatch()
+  useAppStateListener(
+    () => dispatch(setAppState('active')),
+    () => dispatch(setAppState('inactive'))
+  )
   const { isSplashedViewed } = useAppSelector(state => state.ui)
 
   return (
